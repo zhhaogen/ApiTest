@@ -9,12 +9,11 @@ function IsArray(obj) {
           typeof obj.length === 'number' &&
           !(obj.propertyIsEnumerable('length'));
 }
-
 function doFormatJson(){
-	id("jsonPanel").style.display="";
+	id("jsonResultPanel").style.display="";
   SetTab();
   window.IsCollapsible = id("CollapsibleView").checked;
-  var json = id("result").value;
+  var json = id("resultText").value;
   var html = "";
   try{
     if(json == "") json = "\"\"";

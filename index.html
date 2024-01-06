@@ -7,696 +7,270 @@
 </head>
 <body>
 
-<div>
-	<label for="locationText">当前地址:</label>
+<fieldset>
+	<legend>当前地址</legend>
 	<input id="locationText" style="width:100%" type="text" />
-</div>
-
-<div>
-	<label for="actionText">接口地址:</label>
+</fieldset>
+<fieldset>
+	<legend>接口地址</legend>
 	<input id="actionText" style="width:100%" type="text" />
-</div>
-<div id="formMethodPanel" onchange="onFormMethodChange()">
-	<label>提交方式:</label>
-	<input id="ajaxRadio" type="radio" checked name="submit" />
-	<label for="ajaxRadio">AJAX</label>
-	<input id="formRadio" type="radio" name="submit" />
-	<label for="formRadio">FORM</label>
-	<input id="fetchRadio" type="radio" name="submit" />
-	<label for="fetchRadio">FETCH</label>
-</div>
+</fieldset>
 
-<div id="requestMethodPanel" >
-	<label>请求方式:</label>
-	<input id="postRadio" type="radio" name="method" />
-	<label for="postRadio">POST</label>
-	<input id="getRadio" type="radio" checked name="method" />
-	<label for="getRadio">GET</label>
-</div>
-
-<div id="formBlankPanel" >
-	<label for="blankCheck">FORM新窗口打开:</label>
-	<input id="blankCheck" type="checkbox" />
-</div>
-
-<div id="formTypePanel" >
-	<label>FORM编码:</label>
-	<input id="defaultRadio"  type="radio" checked name="enctype" />
-	<label for="defaultRadio">默认</label>
-	<input id="urlencodedRadio" type="radio"  name="enctype" />
-	<label for="urlencodedRadio">application/x-www-form-urlencoded</label>
-	<input id="multipartRadio" type="radio" name="enctype" />
-	<label for="multipartRadio">multipart/form-data</label>
-	<input id="plainRadio" type="radio" name="enctype" />
-	<label for="plainRadio">text/plain</label>
-</div>
-
-<div id="contentTypePanel">
-	<label>Content-Type:</label>
-	<input  type="radio" checked name="contentType" />
-	<label >默认</label>
-	<input id="urlencodedTypeRadio" type="radio"  name="contentType" />
-	<label for="urlencodedTypeRadio">application/x-www-form-urlencoded</label>
-	<input id="multipartTypeRadio" type="radio" name="contentType" />
-	<label for="multipartTypeRadio">multipart/form-data</label>
-	<input id="plainTypeRadio" type="radio" name="contentType" />
-	<label for="plainTypeRadio">text/plain;charset=UTF-8</label>
-</div>
-
-
-<div id="dataTypePanel" onchange="onDataTypeChange()" >
-	<label>数据内容:</label>
-	<input id="kvRadio" type="radio" checked  name="sendType" />
-	<label for="kvRadio">使用键值对</label>
-	<input id="formDataRadio" type="radio"  name="sendType" />
-	<label for="formDataRadio">使用FormData</label>
-	<input id="textDataRadio" type="radio" name="sendType" />
-	<label for="textDataRadio">使用文本</label>
-</div>
-
-<div id="returnTypePanel">
-	<label>处理格式:</label>
-	<input type="radio" checked name="responseType" />
-	<label  >默认</label>
-	<input id="jsonRadio" type="radio"  name="responseType" />
-	<label for="jsonRadio">json</label>
-	<input id="textRadio" type="radio" name="responseType" />
-	<label for="textRadio">text</label>
-	<input id="documentRadio" type="radio" name="responseType" />
-	<label for="documentRadio">document</label>
-	<input id="arraybufferRadio" type="radio" name="responseType" />
-	<label for="arraybufferRadio">arraybuffer</label>
-	<input id="blobRadio" type="radio" name="responseType" />
-	<label for="blobRadio">blob</label>
-</div>
-
-<div id="corsPanel">
-	<label for="withCredentialsCheck">跨域授权:</label>
-	<input id="withCredentialsCheck" type="checkbox" />
-</div>
-
-<div id="fetchModelPanel">
-	<label>Fetch请求模式:</label>
-	<input type="radio" checked name="fetchMode" />
-	<label  >默认</label>
-	<input type="radio"  name="fetchMode" />
-	<label>cors</label>
-	<input type="radio" name="fetchMode" />
-	<label >no-cors</label>
-	<input type="radio" name="fetchMode" />
-	<label >same-origin</label>
-	<input  type="radio" name="fetchMode" />
-	<label >navigate</label> 
-</div>
-<div id="fetchReturnTypePanel">
-	<label>Fetch处理格式:</label>
-	<input type="radio" checked name="fetchResponseType" />
-	<label  >text</label>
-	<input type="radio"  name="fetchResponseType" />
-	<label>json</label>
-	<input type="radio" name="fetchResponseType" />
-	<label >blob</label>
-	<input type="radio" name="fetchResponseType" />
-	<label >FormData</label> 
-</div>
-
-<div id="addHeadItemBtn">
-	<button onclick="addHeadItem()">添加请求头</button>
-</div>
-
-<div id="addDataItemBtn">
-	<button onclick="addDataItem()">添加数据</button><button  onclick="addFileItem()">添加文件</button>
-</div>
-
-<div>
-	<button  onclick="doSubmit()">提交</button>
-</div>
-
-<label>提交数据:</label><br>
-<form id="frt">
-	<div id="dataList">
-	<!---
-		<div>
-			<label>名称:</label><input  type="text"  />
-			<label>值:</label><input  type="text"  />
-			<button onclick="deleteItem(this)">删除</button>
-		</div>
-	-->
+<fieldset id="apiPanel" onclick="onApiChange()">
+	<legend>Api方法</legend>
+	<label>
+		<input type="radio" value="ajax" checked name="api" />
+		AJAX
+	</label>
+	<label>
+		<input type="radio" value="form" name="api" />
+		FORM
+	</label>
+	<label>
+		<input type="radio" value="fetch" name="api" />
+		FETCH
+	</label>
+	<label>
+		<input type="radio" value="beacon" name="api" />
+		BEACON
+	</label>
+</fieldset>
+<fieldset id="methodPanel" >
+	<legend>请求方法</legend>
+	<label>
+		<input type="radio" value="post" checked name="method" />
+		POST
+	</label>
+	<label>
+		<input type="radio" value="get" name="method" />
+		GET
+	</label>
+</fieldset>
+<fieldset id="targetPanel" style="display: none;" onclick="onTargetChange()">
+	<legend>Form打开位置</legend>
+	<label>
+		<input type="radio" value="resultFrame" checked name="target" />
+		当前页面iframe
+	</label>
+	<label>
+		<input type="radio" value="_blank" name="target" />
+		新页面
+	</label>
+</fieldset> 
+<fieldset id="enctypePanel" style="display: none;">
+	<legend>Form编码</legend>
+	<label>
+		<input type="radio" value="" checked name="enctype" />
+		默认
+	</label>
+	<label>
+		<input type="radio" value="application/x-www-form-urlencoded" name="enctype" />
+		application/x-www-form-urlencoded
+	</label>
+	<label>
+		<input type="radio" value="multipart/form-data" name="enctype" />
+		multipart/form-data
+	</label>
+	<label>
+		<input type="radio" value="text/plain" name="enctype" />
+		text/plain
+	</label>  
+</fieldset> 
+<fieldset id="contentTypePanel">
+	<legend>Content-Type</legend>
+	<label>
+		<input type="radio"  value="" checked name="contentType" />
+		默认
+	</label>
+	<label>
+		<input type="radio" value="application/x-www-form-urlencoded" name="contentType" />
+		application/x-www-form-urlencoded
+	</label>
+	<label>
+		<input type="radio" value="multipart/form-data" name="contentType" />
+		multipart/form-data
+	</label>
+	<label>
+		<input type="radio" value="text/plain;charset=UTF-8" name="contentType" />
+		text/plain;charset=UTF-8
+	</label>
+</fieldset>
+<fieldset id="responseTypePanel">
+	<legend>响应类型</legend>
+	<label>
+		<input type="radio"  value="" checked name="responseType" />
+		默认
+	</label>
+	<label>
+		<input type="radio" value="json" name="responseType" />
+		json
+	</label>
+	<label>
+		<input type="radio" value="text" name="responseType" />
+		text
+	</label>
+	<label>
+		<input type="radio" value="document" name="responseType" />
+		document
+	</label>
+	<label>
+		<input type="radio" value="arraybuffer" name="responseType" />
+		arrayBuffer
+	</label>
+	<label>
+		<input type="radio" value="blob" name="responseType" />
+		blob
+	</label>
+</fieldset> 
+<fieldset id="corsPanel">
+	<legend>跨域授权</legend>
+	<label>
+		<input id="withCredentialsCheck" type="checkbox" />
+		withCredentials
+	</label> 
+</fieldset>
+<fieldset id="fetchModelPanel" style="display: none;">
+	<legend>Fetch请求模式</legend>
+	<label>
+		<input type="radio"  value="" checked name="fetchMode" />
+		默认
+	</label>
+	<label>
+		<input type="radio" value="cors" name="fetchMode" />
+		cors
+	</label>
+	<label>
+		<input type="radio" value="no-cors" name="fetchMode" />
+		no-cors
+	</label>
+	<label>
+		<input type="radio" value="same-origin" name="fetchMode" />
+		same-origin
+	</label>
+	<label>
+		<input type="radio" value="navigate" name="fetchMode" />
+		navigate
+	</label>
+</fieldset>
+<fieldset id="fetchResponseTypePanel" style="display: none;">
+	<legend>Fetch处理方法</legend>
+	<label>
+		<input type="radio" checked value="text" name="fetchResponseType" />
+		text
+	</label>
+	<label>
+		<input type="radio" value="json" name="fetchResponseType" />
+		json
+	</label>
+	<label>
+		<input type="radio" value="blob" name="fetchResponseType" />
+		blob
+	</label>
+	<label>
+		<input type="radio" value="formData" name="fetchResponseType" />
+		FormData
+	</label>
+	<label>
+		<input type="radio" value="arrayBuffer" name="fetchResponseType" />
+		arrayBuffer
+	</label>
+</fieldset> 
+<fieldset id="dataTypePanel" onclick="onDataTypeChange()" >
+	<legend>数据内容</legend>
+	<label>
+		<input type="radio" checked value="kv" name="dataType" />
+		使用键值对
+	</label>
+	<label>
+		<input type="radio" value="formData" name="dataType" />
+		使用FormData
+	</label>
+	<label>
+		<input type="radio" value="text" name="dataType" />
+		使用文本
+	</label>
+	<label>
+		<input type="radio" value="blob" name="dataType" />
+		使用blob
+	</label>
+</fieldset>
+<fieldset id="headerListPanel">
+	<legend>请求头</legend>
+	<button onclick="addHeaderItem()">添加请求头</button><br>
+	<div id="headerList">
 	</div>
-</form>
-
-<textarea id="dataText"  style="display:none;">
-</textarea>
-<br>
-<div id="headListPanel">
-	<label>请求头:</label><br>
-	<div id="headList">
+</fieldset>
+<fieldset id="dataListPanel">
+	<legend>请求数据</legend> 
+	<div id="dataKvListBtns">
+		<button onclick="addKvDataItem()">添加数据</button>
+	</div> 
+	<div id="dataKvList"></div>
+	<div id="dataFormListBtns" style="display: none;">
+		<button onclick="addFormDataItem()">添加数据</button><button  onclick="addFormFileItem()">添加文件</button> 
 	</div>
-</div>
-<label>响应信息:</label>
-<div id="errorResult"></div>
-<br>
-<label>返回结果:</label>&nbsp;&nbsp;<button  id="clipBtn" data-clipboard-target="#result" >复制</button>&nbsp;&nbsp;<button  onclick="doFormatJson()">格式化为JSON</button>
-<br>
-<textarea  style="display:none;" id="result">
-</textarea>
-<br>
-<div  style="display:none;" id="jsonPanel"> 
-  <span id="TabSizeHolder">
-    缩进量
-    <select id="TabSize" onchange="TabSizeChanged()">
-      <option value="1">1</option>
-      <option value="2" selected="true">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
-  </span>
-  <label for="QuoteKeys">
-    <input type="checkbox" id="QuoteKeys" onclick="QuoteKeysClicked()" checked="true" /> 
-    引号
-  </label>
-  &nbsp;
-  <span id="CollapsibleViewHolder" >
-      <label for="CollapsibleView">
-        <input type="checkbox" id="CollapsibleView" onclick="CollapsibleViewClicked()" checked="true" /> 
-        显示控制
-      </label>
-  </span>
-  <span id="CollapsibleViewDetail">
-    <a href="javascript:void(0);" onclick="ExpandAllClicked()">展开</a>
-    <a href="javascript:void(0);" onclick="CollapseAllClicked()">叠起</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(3)">2级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(4)">3级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(5)">4级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(6)">5级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(7)">6级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(8)">7级</a>
-    <a href="javascript:void(0);" onclick="CollapseLevel(9)">8级</a>
-  </span>
-  <div id="Canvas" class="Canvas"></div>
-</div>
-<iframe style="display:none;" id="resultFrame"  name="resultFrame"></iframe>
-<script src="api.js"  type="text/javascript"></script>
-<script src="clipboard.js"  type="text/javascript"></script>
-<script>
- var clipboard=new Clipboard('#clipBtn', 
-	{
-		text: function(trigger) 
-		{
-			return result.value;
-		}
-	});
-</script>
-<script src="c.js" type="text/javascript"></script>
-<script>
-document.body.onload=function()
-{
-	id("locationText").value=location.href;
-	if(location.hash!="")
-	{
-		var hashObj={};
-		var hash=location.hash.substring(1);
-		var tmpHashs=hash.split("&");
-		for(var i=0;i<tmpHashs.length;i++)
-		{
-			var kvs=tmpHashs[i].split("=");
-			hashObj[kvs[0]]=kvs[1];
-		}
-		if(hashObj["action"]!=null)
-		{
-			id("actionText").value=hashObj["action"];
-		}
-	}
-	 onDataTypeChange();
-	 onFormMethodChange(); 
-};
-function addDataItem()
-{
-	var index=0;
-	if(dataList.lastElementChild!=null)
-	{
-		index=parseInt(dataList.lastElementChild.dataset["index"]);
-		index=index+1;
-	}	
-	var divEle=document.createElement("div");
-	divEle.innerHTML="<label>名称:</label><input placeholder='key"+index+"'  type='text'  /><label>值:</label><input  type='text'  /><button onclick='deleteItem(this)'>删除</button>";
-	dataList.appendChild(divEle);
-	divEle.dataset["index"]=index;
-}
-function addFileItem()
-{
-	var index=0;
-	if(dataList.lastElementChild!=null)
-	{
-		index=parseInt(dataList.lastElementChild.dataset["index"]);
-		index=index+1;
-	}	
-	var divEle=document.createElement("div");
-	divEle.innerHTML="<label>名称:</label><input placeholder='key"+index+"'  type='text'  /><label>文件:</label><input  type='file'  /><button onclick='deleteItem(this)'>删除</button>";
-	dataList.appendChild(divEle);
-	divEle.dataset["index"]=index;
-}
-function addHeadItem()
-{
-	var index=0;
-	if(headList.lastElementChild!=null)
-	{
-		index=parseInt(headList.lastElementChild.dataset["index"]);
-		index=index+1;
-	}	
-	var divEle=document.createElement("div");
-	divEle.innerHTML="<label>名称:</label><input placeholder='key"+index+"'  type='text'  /><label>值:</label><input  type='text'  /><button onclick='deleteItem(this)'>删除</button>";
-	headList.appendChild(divEle);
-	divEle.dataset["index"]=index;
-}
+	<form id="dataFormList" style="display: none;"></form> 
+	<textarea style="display: none;width: 100%;" id="dataText"></textarea>
+	<input style="display: none;" type="file" id="dataFile" />
+</fieldset>
 
-function deleteItem(ele)
-{
-	ele.parentElement.parentElement.removeChild(ele.parentElement);
-}
-function getRadioValue(name)
-{
-	var eles=document.getElementsByName(name);
-	if(eles )
-	{
-		for(var i=0;i<eles.length;i++)
-		{
-			if(eles[i].checked)
-			{
-				var v=eles[i].nextElementSibling.innerText;
-				if(v=="默认")
-				{
-					return null;
-				}
-				return v;
-			}
-		}
-	}
-}
-
-function getRadioIndex(name)
-{
-	var eles=document.getElementsByName(name);
-	if(eles )
-	{
-		for(var i=0;i<eles.length;i++)
-		{
-			if(eles[i].checked)
-			{ 
-				return i;
-			}
-		}
-	}
-	return 0;
-}
-
-function doAjax()
-{
-	console.log("Ajax 提交");
-	id("result").style.display="";
-	errorResult.innerText="";
-	
-	var sendType=getRadioIndex("sendType");
-	var data;
-	switch(sendType)
-	{
-		case 0:
-		{
-			data={};
-			for(var i=0;i<dataList.children.length;i++)
-			{
-				var item=dataList.children[i];
-				var key=item.children[1].value; 
-				data[key]=item.children[3].value;			
-			}
-			data=makeDataStr(data);
-			break;
-		}
-		case 1:
-		{
-			data = new FormData();
-			for(var i=0;i<dataList.children.length;i++)
-			{
-				var item=dataList.children[i];
-				var key=item.children[1].value; 
-				if(item.children[3].type=="file")
-				{
-					var files=item.children[3].files;
-					for(var j=0;j<files.length;j++)
-					{
-						data.append(key,files[j]);
-					}
-				}else
-				{
-					data.append(key,item.children[3].value);
-				}				
-			}
-			break;  
-		}
-		case 2:
-		{
-			data=dataText.value;
-			break;
-		}
-	}
-	console.log("请求数据",data);
-	
-	var req = new XMLHttpRequest();
-	req.withCredentials=withCredentialsCheck.checked
-	var method=getRadioValue("method");
-	if(method=="GET")
-	{
-		req.open(method,actionText.value+"?"+data); 
-	}else
-	{
-		req.open(method,actionText.value);
-	}		
-	var responseType=getRadioValue("responseType");
-	if(responseType!=null)
-	{
-		req.responseType =responseType;
-	}
-	
-	req.onerror = function (err)
-	{
-		console.log("网络错误",err); 
-		errorResult.innerText="err.message : "+err.message;
-		errorResult.style.color="red";
-		result.value="";
-	};
-	 req.onload = function ()
-	{
-		console.log(req);
-		var contentTypeHead=req.getResponseHeader("Content-Type");
-		errorResult.innerText="status : "+req.status+"\nstatusText : "+req.statusText+"\nContent-Type : "+contentTypeHead;
-	
-		if(req.status==200)
-		{
-			errorResult.style.color="green";
-		}else
-		{
-			errorResult.style.color="red";
-		}
-		if(req.status==200&&req.responseType =="json")
-		{
-			result.value=JSON.stringify(req.response);
-			doFormatJson();
-		}else
-		{
-			if(req.response==null)
-			{
-				result.value="null";
-			}else if(typeof(req.response)=="string")
-			{
-				result.value=req.response;
-				if(contentTypeHead&&contentTypeHead.startsWith("application/json"))
-				{
-					doFormatJson();
-				}
-			}else if(req.response instanceof Blob)
-			{ 
-				result.value="Blob{size:"+req.response.size+",type:\""+req.response.type+"\"}";
-			}else if(req.response instanceof ArrayBuffer)
-			{ 
-				result.value="ArrayBuffer{byteLength:"+req.response.byteLength+"}";
-			}else if(req.response instanceof Document)
-			{
-				result.value=req.response.constructor.name+"{body:"+req.response.body.innerHTML+"}";
-			}else if(typeof(req.response)=="object")
-			{
-				result.value=JSON.stringify(response); 
-				doFormatJson();
-			}else
-			{ 
-				result.value=req.response;
-			} 
-		}
-	};
-	var contentType=getRadioValue("contentType");
-	if(contentType!=null)
-	{
-		console.log(contentType);
-		req.setRequestHeader("Content-Type",contentType);
-	}
-	
-	for(var i=0;i<headList.children.length;i++)
-	{
-		var item=headList.children[i];
-		var key=item.children[1].value; 
-		var value=item.children[3].value;	
-		req.setRequestHeader(key,value);			
-	}
-	
-	if(data==null||method=="GET")
-	{
-		req.send();
-	}else
-	{
-		req.send(data);
-	}
-}
-function doForm()
-{
-	console.log("form 提交");
-	frt.setAttribute("action",actionText.value);
-	frt.setAttribute("method",getRadioValue("method"));
-	if(blankCheck.checked)
-	{
-		frt.setAttribute("target", "_blank"); 
-	}else
-	{
-		frt.setAttribute("target", "resultFrame"); 
-		id("resultFrame").style.display="";
-	}
-	var enctype=getRadioValue("enctype");
-	if(enctype!=null)
-	{
-		frt.setAttribute("enctype",enctype); 
-	}else
-	{
-		frt.removeAttribute("enctype"); 
-	}		
-	for(var i=0;i<dataList.children.length;i++)
-	{
-		var item=dataList.children[i];
-		var key=item.children[1].value;
-		item.children[3].setAttribute("name",key); 
-	}
-	frt.submit();
-}
-function doFetch()
-{
-	console.log("fetch 提交"); 
-	id("result").style.display=""; 
-	
-	var sendType=getRadioIndex("sendType");
-	var body;
-	switch(sendType)
-	{
-		case 0:
-		{
-			body={};
-			for(var i=0;i<dataList.children.length;i++)
-			{
-				var item=dataList.children[i];
-				var key=item.children[1].value; 
-				body[key]=item.children[3].value;			
-			}
-			body=makeDataStr(body);
-			break;
-		}
-		case 1:
-		{
-			body = new FormData();
-			for(var i=0;i<dataList.children.length;i++)
-			{
-				var item=dataList.children[i];
-				var key=item.children[1].value; 
-				if(item.children[3].type=="file")
-				{
-					var files=item.children[3].files;
-					for(var j=0;j<files.length;j++)
-					{
-						body.append(key,files[j]);
-					}
-				}else
-				{
-					body.append(key,item.children[3].value);
-				}				
-			}
-			break;  
-		}
-		case 2:
-		{
-			body=dataText.value;
-			break;
-		}
-	} 
-	var method=getRadioValue("method");
-	var url; 
-	var option={"method":method}; 
-	if(method=="GET")
-	{
-		url=actionText.value+"?"+body; 
-	}else
-	{
-		url=actionText.value;
-		option.body=body;
-	}
-	var mode=getRadioValue("fetchMode");
-	if(mode!=null)
-	{
-		option.mode=mode;
-	}
-	
-	if(headList.children.length>0)
-	{
-		var headers= new Headers();
-		for(var i=0;i<headList.children.length;i++)
-		{
-			var item=headList.children[i];
-			var key=item.children[1].value; 
-			var value=item.children[3].value;	
-			headers.append(key,value);			
-		}
-		option.headers=headers;
-	}
-	
-	var request = new Request(url, option);
-	fetch(request).then(function(response){
-		console.log(response);
-		errorResult.innerText="status : "+response.status+"\nstatusText : "+response.statusText+"\ntype : "+response.type;
-		errorResult.style.color="green";
-		var responseType=getRadioValue("fetchResponseType");
-		if(responseType=="json")
-		{
-			return response.json();
-		}else if(responseType=="blob")
-		{
-			return response.blob();
-		}else if(responseType=="arraybuffer")
-		{
-			return response.arrayBuffer();
-		}else if(responseType=="FormData")
-		{
-			return response.formData();
-		}
-		
-		return response.text();
-	}).then(function(response){
-		console.log(response);
-		if(response==null)
-		{
-			result.value="null";
-		}else if(typeof(response)=="string")
-		{
-			result.value=response; 
-		}else if(response instanceof Blob)
-		{ 
-			result.value="Blob{size:"+response.size+",type:\""+response.type+"\"}";
-		}else if(response instanceof ArrayBuffer)
-		{ 
-			result.value="ArrayBuffer{byteLength:"+response.byteLength+"}";
-		}else if(typeof(response)=="object")
-		{
-			result.value=JSON.stringify(response); 
-			doFormatJson();
-		}else
-		{ 
-			result.value=response;
-		} 
-	}).catch(function(err){
-		console.log(err);
-		errorResult.innerText="err.message : "+err.message;
-		errorResult.style.color="red";
-	});
-}
-function doSubmit()
-{
-	id("resultFrame").style.display="none";
-	id("result").style.display="none";
-	id("jsonPanel").style.display="none";
-	result.value="";
-	errorResult.innerText="";
-	if(ajaxRadio.checked)
-	{
-		doAjax();		
-	}else if(formRadio.checked)
-	{
-		doForm();	
-	}else if(fetchRadio.checked)
-	{
-		doFetch();	
-	}else
-	{
-		console.log("未支持方式");
-	}
-}
-/**
-*提交数据改变UI
-*/
-function onDataTypeChange()
-{
-	var sendType=getRadioIndex("sendType");
-	if(sendType==2)
-	{
-		id("dataList").style.display="none";
-		id("dataText").style.display="";
-	}else{
-		id("dataList").style.display="";
-		id("dataText").style.display="none";
-	}
-}
-/**
-*
-*提交方式改变UI
-*/
-function onFormMethodChange()
-{
-	if(ajaxRadio.checked)
-	{
-		formBlankPanel.style.display="none";
-		formTypePanel.style.display="none";
-		contentTypePanel.style.display=""; 
-		dataTypePanel.style.display="";
-		returnTypePanel.style.display="";
-		corsPanel.style.display="";
-		fetchModelPanel.style.display="none";
-		addHeadItemBtn.style.display="";
-		headListPanel.style.display="";
-		fetchReturnTypePanel.style.display="none";
-		
-	}else if(formRadio.checked)
-	{
-		formBlankPanel.style.display="";
-		formTypePanel.style.display="";
-		contentTypePanel.style.display="none"; 
-		dataTypePanel.style.display="none";
-		returnTypePanel.style.display="none";
-		corsPanel.style.display="none";
-		fetchModelPanel.style.display="none";
-		addHeadItemBtn.style.display="none";
-		headListPanel.style.display="none";
-		fetchReturnTypePanel.style.display="none";
-		kvRadio.checked=true;
-		onDataTypeChange();
-		
-	}else if(fetchRadio.checked)
-	{
-		formBlankPanel.style.display="none";
-		formTypePanel.style.display="none";
-		contentTypePanel.style.display="none"; 
-		dataTypePanel.style.display="";
-		returnTypePanel.style.display="none";
-		corsPanel.style.display="none";
-		fetchModelPanel.style.display="";
-		addHeadItemBtn.style.display="";
-		headListPanel.style.display="";
-		fetchReturnTypePanel.style.display="";
-	} 
-}
-</script>
+<div id="submitPanel">
+	<button  onclick="doSubmit()">提交</button><button  onclick="clearResult()">清空结果</button>
+</div> 
+<fieldset id="responsePanel">
+	<legend>响应信息</legend>
+	<div id="responseText"></div>
+</fieldset>
+<fieldset id="resultPanel">
+	<legend>返回结果</legend>
+	<div id="resultBtns">
+		<button  id="resultClipBtn" data-clipboard-target="#resultText" >复制</button><button  onclick="doFormatJson()">格式化为JSON</button>
+	</div> 
+	<textarea id="resultText" style="width: 100%;">
+	</textarea>
+	<div id="jsonResultPanel" style="display: none;">
+		<span id="TabSizeHolder">
+			缩进量
+			<select id="TabSize" onchange="TabSizeChanged()">
+			  <option value="1">1</option>
+			  <option value="2" selected="true">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			  <option value="6">6</option>
+			</select>
+		  </span>
+		  <label for="QuoteKeys">
+			<input type="checkbox" id="QuoteKeys" onclick="QuoteKeysClicked()" checked="true" /> 
+			引号
+		  </label>
+		  &nbsp;
+		  <span id="CollapsibleViewHolder" >
+			  <label for="CollapsibleView">
+				<input type="checkbox" id="CollapsibleView" onclick="CollapsibleViewClicked()" checked="true" /> 
+				显示控制
+			  </label>
+		  </span>
+		  <span id="CollapsibleViewDetail">
+			<a href="javascript:void(0);" onclick="ExpandAllClicked()">展开</a>
+			<a href="javascript:void(0);" onclick="CollapseAllClicked()">叠起</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(3)">2级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(4)">3级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(5)">4级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(6)">5级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(7)">6级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(8)">7级</a>
+			<a href="javascript:void(0);" onclick="CollapseLevel(9)">8级</a>
+		  </span>
+		  <div id="Canvas" class="Canvas"></div>
+	</div>
+</fieldset>
+<fieldset id="resultFramePanel">
+	<legend>IFrame页面</legend>
+	<iframe id="resultFrameEle" style="display:none;width: 100%;" name="resultFrame"></iframe> 
+</fieldset>
+<script src="ui.js"  type="text/javascript"></script>
+<script src="api.js" type="text/javascript"></script>
+<script src="c.js"  type="text/javascript"></script> 
 </body>
 </html>

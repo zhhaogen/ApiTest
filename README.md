@@ -4,6 +4,7 @@
 * Ajax,即通过XMLHttpRequest提交数据
 * Form表单,`<form>`表单元素,通过点击`type='submit'`的按钮提交数据
 * Fetch,是es6最新的方法，可参见MDN的[Fetch API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
+* Beacon,`navigator.sendBeacon()`方法,可参见MDN的[Beacon API](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/sendBeacon)
 ### Content-Type
 即请求头中Content-Type的值
 ### 数据内容
