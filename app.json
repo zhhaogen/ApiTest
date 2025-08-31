@@ -1,0 +1,15 @@
+{
+  "name": "接口测试",
+  "description":"一个简单接口测试工具",
+  "icons": [{
+    "src": "icon_32.png",
+    "sizes": "32x32"
+  }, {
+    "src": "icon_512.png",
+    "sizes": "512x512"
+  }],
+  "scope": "/",
+  "id": "apitest",
+  "start_url": "./index.html",
+  "display": "fullscreen"
+}

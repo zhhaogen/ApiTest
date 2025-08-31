@@ -36,7 +36,52 @@ function PanelGroup(){
             showPanels[i].style.display="";
         }
     };
+	/**
+	 * 显示全部
+	 */
+	that.showAll=function(){
+		for(var i=0;i<panels.length;i++){
+            panels[i].style.display="";
+        }
+	}
 } 
+/**
+ * 单选框组管理
+ */
+function RadioPanelGroup(container) {
+	var radioEles=container.getElementsByTagName("input");
+	var that=this;
+	/**
+     * 隐藏全部元素
+     */
+    that.hideAll=function(){
+        for(var i=0;i<radioEles.length;i++){
+            radioEles[i].parentElement.style.display="none";
+        }
+    };
+    /**
+     * 仅显示指定内容
+     */
+    that.show=function(){
+        that.hideAll();
+        var showValues=Array.from(arguments);
+		for(var i=0;i<radioEles.length;i++){
+			var radioEle=radioEles[i];
+			if(showValues.indexOf(radioEle.value)===-1){
+				continue;
+			}
+            radioEle.parentElement.style.display="";
+        }
+    };
+	/**
+	 * 显示全部
+	 */
+	that.showAll=function(){
+        for(var i=0;i<radioEles.length;i++){
+            radioEles[i].parentElement.style.display="";
+        }
+    };
+}
 /**
  * 返回选中的input元素
  * @param {string} name 
@@ -92,8 +137,7 @@ function onApiChange(){
 		pg.show(methodPanel,contentTypePanel,responseTypePanel,corsPanel,dataTypePanel,headerListPanel,dataListPanel,responsePanel,resultPanel);
 	}else if(api=="form")
 	{
-		pg.show(methodPanel,targetPanel,enctypePanel,dataListPanel,resultFramePanel);
-		setCheckElementValue("dataType","formData");
+		pg.show(methodPanel,targetPanel,enctypePanel,dataListPanel,resultFramePanel); 
         onTargetChange();
 	}else if(api=="fetch")
 	{
@@ -101,7 +145,41 @@ function onApiChange(){
 	}else if(api=="beacon")
 	{
 		pg.show(dataTypePanel,dataListPanel,responsePanel);
+		setCheckElementValue("method","get");
 	}
+	onMethodChange();
+}
+/**
+ * 请求方法切换
+ */
+function onMethodChange(){
+	var api=getCheckElementValue("api"); 
+	var rg=new RadioPanelGroup(dataTypePanel);
+
+	if(api=="ajax"||api=="fetch"){
+		var method=getCheckElementValue("method");
+		if(method=="get"||method=="delete"){
+			//隐藏formdata和blob
+			rg.show("kv","text");
+			var dataType=getCheckElementValue("dataType"); 
+			if(!(dataType=="kv"||dataType=="text")){
+				setCheckElementValue("dataType","kv");
+			}
+		}else{
+			rg.showAll();
+		} 
+	}else if(api=="form"){
+		rg.show("formData");
+		setCheckElementValue("dataType","formData");
+	}else if(api=="beacon"){
+		//隐藏formdata和blob
+		rg.show("kv","text");
+		var dataType=getCheckElementValue("dataType"); 
+		if(!(dataType=="kv"||dataType=="text")){
+			setCheckElementValue("dataType","kv");
+		}
+	}  
+	
 	onDataTypeChange();
 }
 /**

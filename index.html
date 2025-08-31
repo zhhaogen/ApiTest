@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="txt/html; charset=utf-8" />
 <title>接口测试</title>
+<link rel="manifest" href="app.json">
+<link rel="icon" sizes="16x16 32x32 48x48" href="icon_32.png">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <link href="s.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -20,22 +23,22 @@
 	<legend>Api方法</legend>
 	<label>
 		<input type="radio" value="ajax" checked name="api" />
-		AJAX
+		Ajax
 	</label>
 	<label>
 		<input type="radio" value="form" name="api" />
-		FORM
+		Form
 	</label>
 	<label>
 		<input type="radio" value="fetch" name="api" />
-		FETCH
+		Fetch
 	</label>
 	<label>
 		<input type="radio" value="beacon" name="api" />
-		BEACON
+		Beacon
 	</label>
 </fieldset>
-<fieldset id="methodPanel" >
+<fieldset id="methodPanel" onclick="onMethodChange()">
 	<legend>请求方法</legend>
 	<label>
 		<input type="radio" value="post" checked name="method" />
@@ -44,6 +47,14 @@
 	<label>
 		<input type="radio" value="get" name="method" />
 		GET
+	</label>
+	<label>
+		<input type="radio" value="put" name="method" />
+		PUT
+	</label>
+	<label>
+		<input type="radio" value="delete" name="method" />
+		DELETE
 	</label>
 </fieldset>
 <fieldset id="targetPanel" style="display: none;" onclick="onTargetChange()">

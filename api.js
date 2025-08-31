@@ -21,7 +21,7 @@ function doAjax(){
 
     var req= new XMLHttpRequest();
     req.withCredentials=withCredentials;  
-	if(method=="get")
+	if((method=="get"||method=="delete")&&isNoEmpty(data))
 	{
 		req.open(method,url+"?"+data); 
 	}else
@@ -89,14 +89,14 @@ function doAjax(){
             resultText.value=req.response.constructor.name+"{body:"+req.response.body.innerHTML+"}";
         }else if(typeof(req.response)=="object")
         {
-            resultText.value=JSON.stringify(response); 
+            resultText.value=JSON.stringify(req.response); 
             doFormatJson();
         }else
         { 
             resultText.value=req.response;
         } 
 	};
-    if(data==null||method=="get")
+    if(data==null||method=="get"||method=="delete")
 	{
 		req.send();
 	}else
@@ -118,7 +118,7 @@ function doActiveX(){
     var contentType=getCheckElementValue("contentType");
     var headers=getHeaderList();
     var req=new ActiveXObject("Microsoft.XMLHTTP");
-    if(method=="get")
+    if((method=="get"||method=="delete")&&isNoEmpty(data))
 	{
 		req.open(method,url+"?"+data); 
 	}else
@@ -158,7 +158,7 @@ function doActiveX(){
             doFormatJson();
         }  
 	};
-    if(data==null||method=="get")
+    if(data==null||method=="get"||method=="delete")
 	{
 		req.send();
 	}else
@@ -223,10 +223,10 @@ function doFetch(){
         option["mode"]=fetchMode;
     } 
     if(data!=null){
-        if(method=="post"){
-            option["body"]=data;
-        }else{
+        if((method=="get"||method=="delete")&&isNoEmpty(data)){
             url=url+"?"+data;
+        }else{
+			option["body"]=data; 
         }       
     } 
     if(headers!=null){
